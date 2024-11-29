@@ -1,0 +1,3 @@
+rootProject.name = 'kafdrop'
+include 'kafdrop-core'
+include 'kafdrop-api-example'

@@ -1,0 +1,54 @@
+plugins {
+  id 'org.springframework.boot' version '3.4.0'
+  id 'io.spring.dependency-management' version '1.1.0'
+  id 'java'
+}
+
+java {
+  sourceCompatibility = JavaVersion.VERSION_17
+  targetCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+  mavenLocal()
+  mavenCentral()
+  maven { url 'https://packages.confluent.io/maven/' }
+}
+
+ext {
+  protobufVersion = '3.25.5'
+  testcontainersVersion = '1.20.4'
+  kafkaLibsVersion = '7.7.1'
+  springBootVersion = '3.4.0'
+}
+
+dependencies {
+  implementation "com.google.protobuf:protobuf-java:${protobufVersion}"
+  implementation "com.google.protobuf:protobuf-java-util:${protobufVersion}"
+  implementation 'org.apache.commons:commons-lang3:3.12.0'
+  implementation "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+  implementation "io.confluent:kafka-avro-serializer:${kafkaLibsVersion}"
+  implementation "io.confluent:kafka-schema-registry-client:${kafkaLibsVersion}"
+  implementation "io.confluent:kafka-protobuf-serializer:${kafkaLibsVersion}"
+  implementation 'org.apache.avro:avro:1.12.0'
+  implementation 'org.msgpack:msgpack-core:0.9.8'
+  implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+  implementation "org.springframework.boot:spring-boot-starter-validation:${springBootVersion}"
+  implementation 'org.springframework.kafka:spring-kafka:3.0.0'
+  implementation "org.springframework.boot:spring-boot-starter-undertow:${springBootVersion}"
+  implementation "org.springframework.boot:spring-boot-starter-freemarker:${springBootVersion}"
+  implementation "org.springframework.boot:spring-boot-starter-log4j2:${springBootVersion}"
+  implementation "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
+  implementation 'org.springframework:spring-context:6.0.0'
+  implementation 'org.springframework:spring-core:6.0.0'
+  implementation 'org.springframework:spring-beans:6.0.0'
+  implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
+  testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+  testImplementation "org.testcontainers:testcontainers:${testcontainersVersion}"
+  testImplementation "org.testcontainers:kafka:${testcontainersVersion}"
+}
+
+tasks.withType(JavaCompile) {
+  options.encoding = 'UTF-8'
+  options.compilerArgs << '-Xdoclint:none'
+}
